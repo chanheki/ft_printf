@@ -6,116 +6,118 @@
 /*   By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:57:13 by chanheki          #+#    #+#             */
-/*   Updated: 2022/10/14 09:57:28 by chanheki         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:02:54 by chanheki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_put_s(char *string)
+int	ft_put_s(char *s)
 {
 	int	index;
 
 	index = 0;
-	if (!string)
-		string = "(null)";
-	while (string[index])
+	if (!s)
+		s = "(null)";
+	while (s[index])
 		index++;
-	return (write(1, string, index));
+	return (write(1, s, index));
 }
 
 int	ft_put_n(int n)
 {
-	long long	num;
-	char		temp[10];
-	int			i;
-	int			ret_num;
+	long	num;
+	char	storage[10];
+	int		index;
+	int		return_length;
 
 	if (n == 0)
 		return (write(1, "0", 1));
-	i = 0;
-	ret_num = 0;
-	num = (long long)n;
+	index = 0;
+	return_length = 0;
+	num = (long)n;
 	if (n < 0)
 	{
-		ret_num += write(1, "-", 1);
+		return_length += write(1, "-", 1);
 		num *= -1;
 	}
 	while (num)
 	{
-		temp[i++] = num % 10 + '0';
+		storage[index++] = num % 10 + '0';
 		num = num / 10;
 	}
-	ret_num += i;
-	while (i--)
-		write(1, &temp[i], 1);
-	return (ret_num);
+	while (index--)
+		return_length += write(1, &storage[index], 1);
+	return (return_length);
 }
 
 int	ft_put_x(unsigned int n, char format)
 {
-	int		i;
+	int		index;
 	char	*table;
-	char	temp[8];
+	char	storage[8];
+	int		return_length;
 
+	return_length = 0;
 	if (!n)
 		return (write(1, "0", 1));
 	if (format == 'x')
 		table = "0123456789abcdef";
 	else
 		table = "0123456789ABCDEF";
-	i = 0;
+	index = 0;
 	while (n > 0)
 	{
-		temp[i++] = table[n % 16];
+		storage[index++] = table[n % 16];
 		n /= 16;
 	}
-	while (i--)
-		n += write(1, &temp[i], 1);
-	return (n);
+	while (index--)
+		return_length += write(1, &storage[index], 1);
+	return (return_length);
 }
 
 int	ft_put_p(unsigned int *ptr)
 {
 	char			*table;
-	char			temp[18];
-	int				i;
+	char			storage[18];
+	int				index;
 	unsigned long	num;
+	int				return_length;
 
+	return_length = 0;
 	num = (unsigned long)ptr;
 	table = "0123456789abcdef";
-	i = 0;
+	index = 0;
 	if (!ptr)
-		temp[i++] = '0';
+		storage[index++] = '0';
 	while (num > 0)
 	{
-		temp[i++] = table[num % 16];
+		storage[index++] = table[num % 16];
 		num /= 16;
 	}
-	temp[i++] = 'x';
-	temp[i++] = '0';
-	while (i--)
-		num += write(1, &temp[i], 1);
-	return (num);
+	storage[index++] = 'x';
+	storage[index++] = '0';
+	while (index--)
+		return_length += write(1, &storage[index], 1);
+	return (return_length);
 }
 
 int	ft_put_u(unsigned int num)
 {
-	char		temp[10];
-	int			i;
-	int			ret_num;
+	char		storage[10];
+	int			index;
+	int			return_length;
 
 	if (num == 0)
 		return (write(1, "0", 1));
-	i = 0;
-	ret_num = 0;
+	index = 0;
+	return_length = 0;
 	while (num)
 	{
-		temp[i++] = num % 10 + '0';
+		storage[index++] = num % 10 + '0';
 		num = num / 10;
 	}
-	ret_num += i;
-	while (i--)
-		write(1, &temp[i], 1);
-	return (ret_num);
+	while (index--)
+		return_length += write(1, &storage[index], 1);
+	return (return_length);
 }
