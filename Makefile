@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/10/14 09:57:24 by chanheki          #+#    #+#              #
+#    Updated: 2022/10/14 09:57:26 by chanheki         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC	= cc
 CFLAGS	= -Wall -Wextra -Werror
 
@@ -6,7 +18,7 @@ ARFLAGS	= rcs
 
 RM	= rm -f
 
-NAME	= pf.a
+NAME	= libftprintf.a
 
 SRCS	= ft_printf.c _ft_printf.c
 
