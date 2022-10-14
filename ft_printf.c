@@ -6,7 +6,7 @@
 /*   By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:57:19 by chanheki          #+#    #+#             */
-/*   Updated: 2022/10/14 10:04:08 by chanheki         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:12:51 by chanheki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ static int	ft_check_format(const char *sentense, va_list ap)
 
 	return_length = 0;
 	if (*sentense == 'c')
-		return_length += ft_put_c((char)(va_arg(ap, int)));
+		return_length += ft_put_c((va_arg(ap, int)));
 	else if (*sentense == 's')
-		return_length += ft_put_s((char *)(va_arg(ap, char *)));
+		return_length += ft_put_s((va_arg(ap, char *)));
 	else if (*sentense == 'p')
 		return_length += ft_put_p((va_arg(ap, unsigned int *)));
 	else if (*sentense == 'd' || *sentense == 'i')
-		return_length += ft_put_n((int)(va_arg(ap, int)));
+		return_length += ft_put_n((va_arg(ap, int)));
 	else if (*sentense == 'u')
-		return_length += ft_put_u((unsigned int)(va_arg(ap, int)));
+		return_length += ft_put_u((va_arg(ap, unsigned int)));
 	else if (*sentense == 'x' || *sentense == 'X')
-		return_length += ft_put_x((unsigned int)(va_arg(ap, int)), *sentense);
+		return_length += ft_put_x((va_arg(ap, unsigned int)), *sentense);
 	else if (*sentense == '%')
 		return_length += ft_put_c('%');
 	return (return_length);
